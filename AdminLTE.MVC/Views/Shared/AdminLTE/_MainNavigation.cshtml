@@ -6,14 +6,25 @@
         <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
     <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="~/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
+        <div class="info">
+            <a href="#" class="d-block">Hi, @User.Identity.Name </a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="info">
+            <a href="#" class="d-block">Hi, Visitor</a>
+        </div>
+    </div>
+}
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item ">
@@ -24,14 +35,17 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a asp-controller="Home" asp-action="Privacy" class="nav-link @Url.MakeActiveClass("home","privacy")">
-                        <i class="nav-icon fas fa-lock"></i>
-                        <p>
-                            Privacy
-                        </p>
-                    </a>
-                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Home" asp-action="Privacy" class="nav-link @Url.MakeActiveClass("home","privacy")">
+                            <i class="nav-icon fas fa-lock"></i>
+                            <p>
+                                Privacy
+                            </p>
+                        </a>
+                    </li>
+                }
             </ul>
         </nav>
     </div>

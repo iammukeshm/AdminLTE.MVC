@@ -12,6 +12,8 @@ using AdminLTE.MVC.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace AdminLTE.MVC
 {
@@ -34,6 +36,14 @@ namespace AdminLTE.MVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+services.AddMvc(o =>
+{
+    //Add Authentication to all Controllers by default.
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+    o.Filters.Add(new AuthorizeFilter(policy));
+});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

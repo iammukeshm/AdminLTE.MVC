@@ -18,11 +18,11 @@ namespace AdminLTE.MVC.Controllers
         {
             _logger = logger;
         }
-        [AllowAnonymous]
-         public IActionResult Index()
-        {
-            return View();
-        }
+[AllowAnonymous]
+    public IActionResult Index()
+{
+    return View();
+}
 
         public IActionResult Privacy()
         {

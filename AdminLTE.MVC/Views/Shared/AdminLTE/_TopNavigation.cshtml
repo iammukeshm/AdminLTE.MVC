@@ -5,25 +5,25 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-        </li>
-    </ul>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item d-none d-sm-inline-block">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item d-none d-sm-inline-block">
+                <a asp-area="Identity" asp-page="/Account/Login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a asp-area="Identity" asp-page="/Account/Register" class="nav-link">Register</a>
+            </li>
+        }
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
+    </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
